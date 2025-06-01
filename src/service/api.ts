@@ -30,6 +30,7 @@ const getCountries = async () => {
       languages: item.languages,
       borders: item.borders,
       subregion: item.subregion,
+      cioc: item.cioc,
     } as DetailPageProps;
   });
 

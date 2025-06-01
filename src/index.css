@@ -202,3 +202,9 @@ input[type="search"]::-webkit-search-results-decoration {
   margin-left: 1.5rem;
   padding-bottom: 2.875rem;
 }
+
+.border-countries {
+  display: inline-block;
+  padding-inline: 1rem;
+  color: #111517;
+}

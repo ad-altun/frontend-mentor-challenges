@@ -19,16 +19,12 @@ export default function Card({ name, population, region, capital, flags }: HomeP
     //     // const conditionToSearch: boolean = searchQuery.length === 0 || searchQuery.length > 2;
     //   }
 
-    const handleClick = (name: string) => {
-        onPressed(name);
-        console.log(name)
-    }
 
     return (
         <div>
-            <Link to={`/details/`}>
+            <Link to={`/details/${name.common}`}>
                 {
-                    <div className="cardClass" onClick={() => handleClick(name.common)}>
+                    <div className="cardClass">
                         <img src={flags.png}
                             alt={flags.alt}
                             className="card-flag" />
@@ -43,25 +39,4 @@ export default function Card({ name, population, region, capital, flags }: HomeP
             </Link>
         </div>
     )
-
-    // return (
-    //     <div>
-    //         {
-    //             veriler.map((country, index) => {
-    //                 return (
-    //                     <div key={index} className="cardClass" >
-    //                         <img src={country.flags.svg}
-    //                             alt={country.flags.alt}
-    //                             className="card-flag" />
-    //                         <div className="card-text">
-    //                             <h2 className="nunito-font-800">{country.name.common}</h2>
-    //                             <p>{`Population: ${country.population}`}</p>
-    //                             <p>{`Region: ${country.region}`}</p>
-    //                             <p>{`Capital: ${country.capital}`}</p>
-    //                         </div>
-    //                     </div>
-    //                 )
-    //             })}
-    //     </div>
-    // )
 }

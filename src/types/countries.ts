@@ -23,6 +23,7 @@ export interface DetailPageProps extends HomePageProps {
   languages?: Record<string, string>;
   borders?: string[];
   subregion?: string;
+  cioc?: string;
   // area?: number;
 }
 

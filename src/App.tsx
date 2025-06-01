@@ -8,6 +8,7 @@ function App() {
   const selectedTheme = localStorage.getItem('selectedTheme') as ThemeModes;
   const [theme, setTheme] = useState(selectedTheme);
 
+  // update dark mode
   useEffect(() => {
     const updateTheme = () => setTheme(localStorage.getItem('selectedTheme') as ThemeModes)
     updateTheme();
@@ -22,7 +23,7 @@ function App() {
         <Home />
       </div>
     </div>
-  )
-}
-// see video 480. Mapping the Response
-export default App
+  );
+};
+
+export default App;
