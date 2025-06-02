@@ -10,16 +10,14 @@ export default function Detail() {
 
     if (!country) return <p>Country not found!</p>
 
-    // const borderCountryArrays = 
+    const borderCountries = country.borders?.map((code) => {
+        const matchings = detailsPage.find(c => c.cca3 === code)?.name.common
+        return [
+            matchings
+        ];
+    });
 
-    const borderCountriesObject = country.borders?.filter(c => c === country.cioc);
-    // const borderCountries: string[] = borderCountriesObject.map((border) => {
-    //     return (
-    //         border.name.common
-    //     )
-    // })
-
-    console.log(borderCountriesObject)
+    console.log("country borders: ", country.borders)
 
     // Extract first native name
     const nativeNameObject = country.name.nativeName;
@@ -32,10 +30,6 @@ export default function Detail() {
 
     const languagesObject = country.languages;
     const languagesEntries = languagesObject ? Object.values(languagesObject) : null;
-
-    // const borderCountriesArray = country.borders?.map((borderCountry) => {
-    //     return borderCountry;
-    // })
 
     return (
         <div>
@@ -67,7 +61,11 @@ export default function Detail() {
                         </div>
                         <div className="detail-third">
                             <p className='item'>Border Countries:
-                                <span className='border-countries'>{borderCountries}</span>
+                                <span className='border-countries'>{borderCountries?.map((c, index) => {
+                                    return <Link to={`/details/${c}`} key={index}
+                                        className='border-links'>{c}
+                                    </Link>
+                                })}</span>
                             </p>
                             {/* <p className="item">Border Countries:
                                 {country.borders?.map((borderCountry, index) => {

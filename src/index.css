@@ -208,3 +208,23 @@ input[type="search"]::-webkit-search-results-decoration {
   padding-inline: 1rem;
   color: #111517;
 }
+
+.border-links {
+  /* background-color: var(--primary-background); */
+  padding: 0 1.2rem;
+  margin: 0;
+  text-decoration: none;
+  color: gray;
+  /* color: var(--primary-text); */
+  /* -webkit-box-shadow: rgb(0 0 0 / 3%) 0px 0px 3px 3px; */
+  /* box-shadow: rgb(0 0 0 / 3%) 0px 0px 3px 3px; */
+}
+
+.not-found-page {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+  /* justify-items: center; */
+  /* text-align: center; */
+}

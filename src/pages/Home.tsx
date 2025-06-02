@@ -22,36 +22,6 @@ function Home() {
     }, []);
 
 
-
-
-    // console.log("search Term:  ", searchTerm)
-
-    // const filterbitte = (searchTerm: string, homePage: HomePageProps[]) => {
-    //     return {
-    //         homePage.filter((country: HomePageProps) =>
-    //      country.name.common.toLowerCase().includes(searchTerm.toLowerCase()))
-    //     }
-    // }
-
-
-    // const searchAndFilterResult: HomePageProps[] = useMemo<HomePageProps[]>(
-    //     () =>{ return  
-
-    //     },
-    //     [searchTerm]) 
-
-    // console.log("result   ", searchResult)
-
-    // const conditionToSearch: boolean = searchTerm.length === 0 || searchTerm.length > 2;
-
-    // if (conditionToSearch) {
-    //     if (searchTerm) {
-    //         setListed(searchResult)
-    //     }
-    // }
-
-
-
     const Result = useMemo(() => {
         let currentCountries = countries;
 
@@ -81,16 +51,6 @@ function Home() {
         return { currentCountries, handleSelectedRegion, handleOnChange };
     }, [countries, searchTerm, selectedRegion])
 
-
-    // const handleSelectedRegion = (region: string) => {
-    //     const selectedRegion = homePage.filter((country) => country.region === region)
-    //     if (selectedRegion.length) {
-    //         setListed(selectedRegion);
-    //     }
-    //     else {
-    //         setListed(homePage)
-    //     }
-    // }
 
     return (
         <div>

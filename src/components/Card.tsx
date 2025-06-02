@@ -1,7 +1,7 @@
 // import {  useState } from "react"
 // import { homePage } from '../service/api.ts'
 // import { type HomePageProps } from "../types/countries.ts"
-import { Link } from "react-router"
+import { Link, Outlet } from "react-router"
 import { HomePageProps } from "../types/countries.ts"
 
 
@@ -37,6 +37,9 @@ export default function Card({ name, population, region, capital, flags }: HomeP
                     </div>
                 }
             </Link>
+            <div>
+                <Outlet />
+            </div>
         </div>
     )
 }
