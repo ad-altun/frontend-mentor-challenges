@@ -14,6 +14,7 @@ export interface HomePageProps {
     svg?: string;
     alt: string;
   };
+  isLoading: boolean;
 }
 
 export interface DetailPageProps extends HomePageProps {
@@ -24,6 +25,7 @@ export interface DetailPageProps extends HomePageProps {
   borders?: string[];
   subregion?: string;
   cca3?: string;
+  topLevelDomain?: string[];
   // area?: number;
 }
 

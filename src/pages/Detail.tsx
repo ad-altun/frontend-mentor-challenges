@@ -1,23 +1,60 @@
 import { Link } from 'react-router'
 import { useParams } from 'react-router'
-import { detailsPage } from "../service/api.ts"
-// import { DetailPageProps } from "../types/countries.ts";
+// import { detailsPage } from "../service/api.ts"
+import Header from '../components/Header.tsx';
+import { IoMdArrowRoundBack } from "react-icons/io";
+import { useEffect, useState } from 'react';
+import getCountries from '../service/api.ts';
+import { DetailPageProps } from '../types/countries.ts';
+import Loading from '../components/Loading.tsx';
+import FetchFailed from './FetchFailed.tsx';
 
 export default function Detail() {
-    // const [country, setCountry] = useState<DetailPageProps>();
+    const [country, setCountry] = useState<DetailPageProps>();
+    const [isLoading, setIsLoading] = useState<boolean>(true);
+    const fields: string[] = ["name", "languages", "capital", "region", "flags", "population", "currencies", "subregion", "borders"];
     const { name } = useParams();
-    const country = detailsPage.find(c => c.name.common === name);
 
-    if (!country) return <p>Country not found!</p>
+    const getResp = async () => {
+        setIsLoading(true);
+        const response = await getCountries(`https://restcountries.com/v3.1/name/${name}?status=true&fields=${fields}`);
+        const detailsPage = response.map((item) => {
+            return {
+                name: item.name,
+                population: item.population,
+                flags: item.flags,
+                capital: item.capital,
+                region: item.region,
+                currencies: item.currencies,
+                languages: item.languages,
+                borders: item.borders,
+                subregion: item.subregion,
+                cca3: item.cca3,
+                topLevelDomain: item.tld,
+            } as DetailPageProps;
+        });
+        setCountry(detailsPage[0])
+        setIsLoading(false);
+    }
 
-    const borderCountries = country.borders?.map((code) => {
-        const matchings = detailsPage.find(c => c.cca3 === code)?.name.common
-        return [
-            matchings
-        ];
-    });
+    useEffect(() => {
+        let mounted: boolean = true;
 
-    console.log("country borders: ", country.borders)
+        if (mounted) {
+            getResp();
+        };
+
+        return () => {
+            mounted = false;
+        };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
+    if (!country) {
+        return <FetchFailed />
+    }
+
+    const borderCountries = country.borders;
 
     // Extract first native name
     const nativeNameObject = country.name.nativeName;
@@ -26,70 +63,64 @@ export default function Detail() {
         : null;
 
     const currencyObject = country.currencies;
-    const currencyEntries = currencyObject ? Object.values(currencyObject)[0] : null;
+    const currencyEntries = currencyObject ? Object.values(currencyObject)[0].symbol : null;
 
     const languagesObject = country.languages;
     const languagesEntries = languagesObject ? Object.values(languagesObject) : null;
 
     return (
-        <div>
-            <div className="back-button">
-                <i className="fa-solid fa-arrow-left-long"></i>
-                <Link to={'/'}>Go Back</Link>
-            </div>
+        <div className='details'>
+            <Header />
             {
-                <div>
-                    <div className="flag-area">
-                        <img src={`${country.flags.png}`} alt={`${country.name.common} flag`} />
-                    </div>
-                    <div className="detail-area">
-                        <h2 className="country-name">{`${country.name.common}`}</h2>
-                        <div className="detail-first">
-                            <p className="item">
-                                Native Name: <span>{`${firstNativeEntry?.common || 'N/A'}`}</span>
-                            </p>
-                            <p className="item">Population: <span>{`${country.population}`}</span></p>
-                            <p className="item">Region: <span>{`${country.region}`}</span></p>
-                            <p className="item">Sub Region: <span>{`${country.subregion}`}</span></p>
-                            <p className="item">Capital: <span>{`${country.capital}`}</span></p>
+                isLoading
+                    ?
+                    <Loading />
+                    :
+                    <section className='details-section'>
+                        <div className="back-button">
+                            <IoMdArrowRoundBack />
+                            <Link to={'/'}>Back</Link>
                         </div>
-                        <div className="detail second">
-                            {/* <p className="item">Top Level Domain: <span>{`${detail.topLevelDomain}`}</span></p> */}
-                            {/* <p className="item">Currencies: <span>{`${country.currencies}`}</span></p> */}
-                            <p className="item">Currencies: <span>{`${currencyEntries?.name || 'N/A'}`}</span></p>
-                            <p className="item">Languages: <span>{`${languagesEntries || 'N/A'}`}</span></p>
+                        <div >
+                            <div>
+                                <img src={`${country.flags.png}`} alt={`${country.name.common} flag`} />
+                            </div>
+                            <div className="detail-area">
+                                <h2 className="country-name">{`${country.name.common}`}</h2>
+                                <div>
+                                    <p className="details-item">
+                                        Native Name: <span>{`${firstNativeEntry?.common || 'N/A'}`}</span>
+                                    </p>
+                                    <p className="details-item">Population: <span>{`${country.population.toLocaleString() || 'N/A'}`}</span></p>
+                                    <p className="details-item">Region: <span>{`${country.region || 'N/A'}`}</span></p>
+                                    <p className="details-item">Sub Region: <span>{`${country.subregion || 'N/A'}`}</span></p>
+                                    <p className="details-item">Capital: <span>{`${country.capital || 'N/A'}`}</span></p>
+                                </div>
+                                <div className="detail-mid">
+                                    <p className="details-item">Top Level Domain: <span>{`${country.topLevelDomain}`}</span></p>
+                                    <p className="details-item">Currencies: <span>{`${currencyEntries || 'N/A'}`}</span></p>
+                                    <p className="details-item">Languages: <span>{`${languagesEntries || 'N/A'}`}</span></p>
+                                </div>
+                                <div className="detail-border">
+                                    <p className='details-item'>Border Countries: </p>
+                                    <div className='border-countries'>
+                                        {borderCountries && borderCountries.length > 0 ?
+                                            borderCountries?.map((c, index) => {
+                                                return (
+                                                    <Link to={`/details/${c}`} key={index} className='border-links'>
+                                                        <p>{c}</p>
+                                                    </Link>
+                                                )
+                                            })
+                                            :
+                                            <p>N/A</p>}
+                                    </div>
+
+                                </div>
+                            </div>
                         </div>
-                        <div className="detail-third">
-                            <p className='item'>Border Countries:
-                                <span className='border-countries'>{borderCountries?.map((c, index) => {
-                                    return <Link to={`/details/${c}`} key={index}
-                                        className='border-links'>{c}
-                                    </Link>
-                                })}</span>
-                            </p>
-                            {/* <p className="item">Border Countries:
-                                {country.borders?.map((borderCountry, index) => {
-                                    return (<span className='border-countries' key={index}>
-                                        <Link to={`/${country.cioc === borderCountry}`} >
-                                            {borderCountry}</Link>
-                                    </span>);
-                                })}</p> */}
-                        </div>
-                    </div>
-                </div>
+                    </section>
             }
         </div>
     )
 }
-
-// image,
-//     countryName,
-//     nativeName,
-//     population,
-//     region,
-//     subRegion,
-//     capital,
-//     topLevelDomain,
-//     currencies,
-//     languages,
-//     borderCountries
