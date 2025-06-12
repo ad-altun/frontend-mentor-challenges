@@ -24,9 +24,14 @@ export interface DetailPageProps extends HomePageProps {
   languages?: Record<string, string>;
   borders?: string[];
   subregion?: string;
-  cca3?: string;
   topLevelDomain?: string[];
-  // area?: number;
+}
+
+export interface AlphaCode3 {
+  name: {
+    common: string;
+  };
+  cca3?: string;
 }
 
 export interface Countries {

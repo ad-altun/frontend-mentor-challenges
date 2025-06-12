@@ -3,7 +3,7 @@ import Header from "../components/Header.tsx";
 import Card from "../components/Card.tsx"
 import Search from '../components/Search.tsx'
 import Filter from '../components/Filter.tsx'
-import getCountries from '../service/api.ts'
+import { getCountries } from '../service/api.ts'
 import { HomePageProps } from "../types/countries.ts";
 import Loading from "../components/Loading.tsx";
 // import { Link } from "react-router";
