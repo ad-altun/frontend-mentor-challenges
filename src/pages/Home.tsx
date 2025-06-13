@@ -19,74 +19,35 @@ function Home() {
     const [searchTerm, setSearchTerm] = useState<string>("");
     const [selectedRegion, setSelectedRegion] = useState<string>("All")
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    // const [listed, setListed] = useState<HomePageProps[]>(homePage);
-
-    // const getRes = useCallback(async () => {
-    //     const response = await getCountries(`https://restcountries.com/v3.1/all}`);
-    //     const homePage = response.map((item) => {
-    //         return {
-    //             name: item.name,
-    //             population: item.population,
-    //             flags: item.flags,
-    //             capital: item.capital,
-    //             region: item.region,
-    //         } as HomePageProps;
-
-    //     });
-    //     // console.log(hus)
-    //     setCountries(() => homePage);
-    // }, []);
 
     // getRes()
     const fields: string[] = ["name", "language", "capital", "region", "flags", "population"];
-    // console.log(fields.toString())
-
-    const getRes = async () => {
-        setIsLoading(true);
-        const response = await getCountries(`https://restcountries.com/v3.1/independent?status=true&fields=${fields}`);
-        // console.log(response)
-        const homePage = response.map((item) => {
-            return {
-                name: item.name,
-                population: item.population,
-                flags: item.flags,
-                capital: item.capital,
-                region: item.region,
-            } as HomePageProps;
-
-        });
-        setCountries(homePage);
-        setIsLoading(false);
-    };
 
     useEffect(() => {
-        let mounted: boolean = true;
+        const getRes = async () => {
+            try {
+                setIsLoading(true);
+                const response = await getCountries(`https://restcountries.com/v3.1/independent?status=true&fields=${fields}`);
+                // console.log(response)
+                const homePage = response.map((item) => {
+                    return {
+                        name: item.name,
+                        population: item.population,
+                        flags: item.flags,
+                        capital: item.capital,
+                        region: item.region,
+                    } as HomePageProps;
 
-        // const getRes = async () => {
-        //     if (mounted) {
-        //         const response = await getCountries(`https://restcountries.com/v3.1/all}`);
-        //         const homePage = response.map((item) => {
-        //             return {
-        //                 name: item.name,
-        //                 population: item.population,
-        //                 flags: item.flags,
-        //                 capital: item.capital,
-        //                 region: item.region,
-        //             } as HomePageProps;
-
-        //         });
-        //         // console.log(hus)
-        //         setCountries(homePage);
-        //     }
-        // };
-
-        if (mounted) {
-            getRes()
+                });
+                setCountries(homePage);
+                setIsLoading(false);
+            } catch (error) {
+                console.log(error)
+            }
         };
 
-        return () => {
-            mounted = false;
-        }
+        getRes()
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -116,14 +77,12 @@ function Home() {
             );
         }
 
-        // console.log(currentCountries)
         currentCountries.sort((a, b) => a.name.common.localeCompare(b.name.common));
 
         return { currentCountries, handleSelectedRegion, handleOnChange };
     }, [countries, searchTerm, selectedRegion])
 
 
-    // console.log("sssss:   ", countries.length)
     return (
         <div className="home-page shadow">
             <div className="home-header nunito-font-300" >
@@ -155,7 +114,6 @@ function Home() {
                         :
                         <div className="search-failed">
                             <p className="search-failed-text">No country matched your search!</p>
-                            {/* <Link to={'/'} className="go-back">Go Back</Link> */}
                         </div>)
                 }
             </div>

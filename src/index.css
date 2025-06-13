@@ -65,7 +65,7 @@ body {
 }
 
 body * {
-  transition: color 0.3s ease-in-out;
+  transition: background-color 0.7s ease-in-out;
 }
 
 .app {

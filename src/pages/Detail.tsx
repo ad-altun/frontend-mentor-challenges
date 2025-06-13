@@ -21,25 +21,28 @@ export default function Detail() {
 
     useEffect(() => {
         const getResp = async () => {
-            setIsLoading(true);
-            const response = await getCountries(`https://restcountries.com/v3.1/name/${name}?status=true&fields=${fields}`);
-            // console.log(response)
-            const detailsPage = response.map((item) => {
-                return {
-                    name: item.name,
-                    population: item.population,
-                    flags: item.flags,
-                    capital: item.capital,
-                    region: item.region,
-                    currencies: item.currencies,
-                    languages: item.languages,
-                    borders: item.borders,
-                    subregion: item.subregion,
-                    topLevelDomain: item.tld,
-                } as DetailPageProps;
-            });
-            setCountry(detailsPage[0])
-            setIsLoading(false);
+            try {
+                setIsLoading(true);
+                const response = await getCountries(`https://restcountries.com/v3.1/name/${name}?status=true&fields=${fields}`);
+                const detailsPage = response.map((item) => {
+                    return {
+                        name: item.name,
+                        population: item.population,
+                        flags: item.flags,
+                        capital: item.capital,
+                        region: item.region,
+                        currencies: item.currencies,
+                        languages: item.languages,
+                        borders: item.borders,
+                        subregion: item.subregion,
+                        topLevelDomain: item.tld,
+                    } as DetailPageProps;
+                });
+                setCountry(detailsPage[0])
+                setIsLoading(false);
+            } catch (error) {
+                console.log(error)
+            }
         }
 
         getResp();
@@ -49,14 +52,18 @@ export default function Detail() {
 
     useEffect(() => {
         const getAlpha3Code = async () => {
-            const response = await getAlphaCode(`https://restcountries.com/v3.1/independent?status=true&fields=name,cca3`);
-            const alpha3CodeList = response.map((item) => {
-                return {
-                    name: item.name,
-                    cca3: item.cca3,
-                } as AlphaCode3;
-            });
-            setAlpha3List(alpha3CodeList);
+            try {
+                const response = await getAlphaCode(`https://restcountries.com/v3.1/independent?status=true&fields=name,cca3`);
+                const alpha3CodeList = response.map((item) => {
+                    return {
+                        name: item.name,
+                        cca3: item.cca3,
+                    } as AlphaCode3;
+                });
+                setAlpha3List(alpha3CodeList);
+            } catch (error) {
+                console.log(error)
+            }
         }
 
         getAlpha3Code();
@@ -78,6 +85,7 @@ export default function Detail() {
 
     const languagesObject = country?.languages;
     const languagesEntries = languagesObject ? Object.values(languagesObject) : null;
+    console.log(country)
 
     return (
         <main className='details-main'>
