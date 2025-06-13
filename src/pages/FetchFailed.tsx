@@ -1,5 +1,7 @@
 import { Link } from "react-router";
 
+// Application error: a server-side exception has occurred 
+// (see the browser's console for more information).
 
 export default function FetchFailed() {
     return (

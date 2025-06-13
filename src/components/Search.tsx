@@ -19,13 +19,13 @@ export default function Search({ onChangeProb }: SearchProps) {
     }
 
     return (
-        <main>
-            <div className="search-area" >
-                <FaSearch className="search-icon" />
-                {/* <i className="fa-solid fa-magnifying-glass"></i> */}
-                <input type="search" placeholder="Search for a country..." id="search"
-                    onChange={e => handleChange(e.target.value)} />
-            </div>
+        <main className="search-area">
+
+            <FaSearch className="search-icon" />
+            {/* <i className="fa-solid fa-magnifying-glass"></i> */}
+            <input type="search" placeholder="Search for a country..." id="search"
+                onChange={e => handleChange(e.target.value)} />
+
         </main>
     )
 }

@@ -16,8 +16,8 @@ export default function Filter({ onSelect }: FilterProps) {
     }
 
     return (
-        <main>
-            <div className="filter-area"  >
+        <main className="filter-area">
+            <div   >
                 <select name="" id="select-filter" className="select-filter"
                     onChange={e => { filterChangeHandler(e.target.value) }}>
                     <option value="All">Filter by Region</option>

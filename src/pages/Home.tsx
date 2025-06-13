@@ -125,33 +125,41 @@ function Home() {
 
     // console.log("sssss:   ", countries.length)
     return (
-        <div className="home-page">
-            <div className={`nunito-font-300`} >
+        <div className="home-page shadow">
+            <div className="home-header nunito-font-300" >
                 <Header />
             </div>
-            <Search onChangeProb={Result.handleOnChange} />
-            <Filter onSelect={Result.handleSelectedRegion} />
-            {isLoading ? <Loading /> :
-                (Result.currentCountries.length !== 0 ?
-                    <div>
-                        {
-                            Result.currentCountries && Result.currentCountries.map((country, i) => {
-                                return (
-                                    <div key={i}>
-                                        <Card name={country.name} population={country.population}
-                                            region={country.region} capital={country.capital}
-                                            flags={country.flags} isLoading={isLoading} />
-                                    </div>
-                                )
-                            })
-                        }
-                    </div>
-                    :
-                    <div className="search-failed">
-                        <p className="search-failed-text">No country matched your search!</p>
-                        {/* <Link to={'/'} className="go-back">Go Back</Link> */}
-                    </div>)
-            }
+            <div className="filter-tools-home">
+                <Search onChangeProb={Result.handleOnChange} />
+                <Filter onSelect={Result.handleSelectedRegion} />
+            </div>
+            <div>
+                {isLoading ?
+                    <div className="">
+                        <Loading />
+                    </div> :
+                    (Result.currentCountries.length !== 0 ?
+                        <div className="card-home">
+                            {
+                                Result.currentCountries && Result.currentCountries.map((country, i) => {
+                                    return (
+                                        <div key={i}>
+                                            <Card name={country.name} population={country.population}
+                                                region={country.region} capital={country.capital}
+                                                flags={country.flags} isLoading={isLoading} />
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
+                        :
+                        <div className="search-failed">
+                            <p className="search-failed-text">No country matched your search!</p>
+                            {/* <Link to={'/'} className="go-back">Go Back</Link> */}
+                        </div>)
+                }
+            </div>
+
         </div>
     )
 }

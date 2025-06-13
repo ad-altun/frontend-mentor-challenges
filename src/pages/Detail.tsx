@@ -80,68 +80,74 @@ export default function Detail() {
     const languagesEntries = languagesObject ? Object.values(languagesObject) : null;
 
     return (
-        <div className='details'>
-            <Header />
-            {
-                country ?
-                    isLoading
-                        ?
-                        <Loading />
-                        :
-                        <section className='details-section'>
-                            <NavLink to={'/'} className="back-button">
-                                <BiArrowBack className='react-icon' />
-                                Back
-                            </NavLink>
-                            <div >
-                                <div>
-                                    <img src={`${country.flags.png}`} alt={`${country.name.common} flag`} />
-                                </div>
-                                <div className="detail-area">
-                                    <h2 className="country-name">{`${country.name.common}`}</h2>
+        <main className='details-main'>
+            <div className='shadow'>
+                <div className="details-header">
+                    <Header />
+                </div>
+                {
+                    country ?
+                        isLoading
+                            ?
+                            <Loading />
+                            :
+                            <section className='details-section'>
+                                <NavLink to={'/'} className="back-button">
+                                    <BiArrowBack className='react-icon' />
+                                    Back
+                                </NavLink>
+                                <div className='details-content'>
                                     <div>
-                                        <p className="details-item">
-                                            Native Name:<span>{` ${firstNativeEntry?.common || 'N/A'}`}</span>
-                                        </p>
-                                        <p className="details-item">Population:
-                                            <span>{` ${country.population.toLocaleString() || 'N/A'}`}</span></p>
-                                        <p className="details-item">Region:
-                                            <span>{` ${country.region || 'N/A'}`}</span></p>
-                                        <p className="details-item">Sub Region:
-                                            <span>{` ${country.subregion || 'N/A'}`}</span></p>
-                                        <p className="details-item">Capital:
-                                            <span>{` ${country.capital || 'N/A'}`}</span></p>
+                                        <img src={`${country.flags.png}`} alt={`${country.name.common} flag`} />
                                     </div>
-                                    <div className="detail-mid">
-                                        <p className="details-item">Top Level Domain:
-                                            <span>{` ${country.topLevelDomain}`}</span></p>
-                                        <p className="details-item">Currencies:
-                                            <span>{` ${currencyEntries || 'N/A'}`}</span></p>
-                                        <p className="details-item">Languages:
-                                            <span>{`${languagesEntries || 'N/A'}`}</span></p>
-                                    </div>
-                                    <div className="detail-border">
-                                        <p className='details-item'>Border Countries: </p>
-                                        <div className='border-countries'>
-                                            {borderCountries && borderCountries.length > 0 ?
-                                                borderCountries?.map((c, index) => {
-                                                    return (
-                                                        <Link to={`/details/${alpha3List?.find(x => x.cca3 === c)?.name.common}`}
-                                                            key={index} className='border-links'>
-                                                            <p>{c}</p>
-                                                        </Link>
-                                                    )
-                                                })
-                                                :
-                                                <p>N/A</p>}
+                                    <div className="detail-area">
+                                        <h2 className="country-name">{`${country.name.common}`}</h2>
+                                        <div className="details-mid">
+                                            <div>
+                                                <p className="details-item">
+                                                    Native Name:<span>{` ${firstNativeEntry?.common || 'N/A'}`}</span>
+                                                </p>
+                                                <p className="details-item">Population:
+                                                    <span>{` ${country.population.toLocaleString() || 'N/A'}`}</span></p>
+                                                <p className="details-item">Region:
+                                                    <span>{` ${country.region || 'N/A'}`}</span></p>
+                                                <p className="details-item">Sub Region:
+                                                    <span>{` ${country.subregion || 'N/A'}`}</span></p>
+                                                <p className="details-item">Capital:
+                                                    <span>{` ${country.capital || 'N/A'}`}</span></p>
+                                            </div>
+                                            <div className="">
+                                                <p className="details-item">Top Level Domain:
+                                                    <span>{` ${country.topLevelDomain}`}</span></p>
+                                                <p className="details-item">Currencies:
+                                                    <span>{` ${currencyEntries || 'N/A'}`}</span></p>
+                                                <p className="details-item">Languages:
+                                                    <span>{`${languagesEntries || 'N/A'}`}</span></p>
+                                            </div>
                                         </div>
+                                        <div className="detail-border">
+                                            <p className='details-item'>Border Countries: </p>
+                                            <div className='border-countries'>
+                                                {borderCountries && borderCountries.length > 0 ?
+                                                    borderCountries?.map((c, index) => {
+                                                        return (
+                                                            <Link to={`/details/${alpha3List?.find(x => x.cca3 === c)?.name.common}`}
+                                                                key={index} className='border-links'>
+                                                                <p>{c}</p>
+                                                            </Link>
+                                                        )
+                                                    })
+                                                    :
+                                                    <p>N/A</p>}
+                                            </div>
 
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </section> :
-                    <FetchFailed />
-            }
-        </div>
+                            </section> :
+                        <FetchFailed />
+                }
+            </div>
+        </main>
     )
 }
