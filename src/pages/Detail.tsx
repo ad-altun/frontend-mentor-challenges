@@ -13,6 +13,7 @@ export default function Detail() {
     const [country, setCountry] = useState<DetailPageProps>();
     const [alpha3List, setAlpha3List] = useState<AlphaCode3[]>();
     const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [fetchFailed, setFetchFailed] = useState<boolean>(false);
     const fields: string[] = ["name", "languages", "capital", "region",
         "flags", "population", "currencies", "subregion", "borders", "tld"];
     const { name } = useParams();
@@ -42,6 +43,7 @@ export default function Detail() {
                 setIsLoading(false);
             } catch (error) {
                 console.log(error)
+                setFetchFailed(true);
             }
         }
 
@@ -85,7 +87,6 @@ export default function Detail() {
 
     const languagesObject = country?.languages;
     const languagesEntries = languagesObject ? Object.values(languagesObject) : null;
-    console.log(country)
 
     return (
         <main className='details-main'>
@@ -94,10 +95,13 @@ export default function Detail() {
                     <Header />
                 </div>
                 {
-                    country ?
+                    // country !== undefined && Object.keys(country).length !== 0 ?
+                    !fetchFailed ?
                         isLoading
                             ?
-                            <Loading />
+                            <div className="details-loading">
+                                <Loading />
+                            </div>
                             :
                             <section className='details-section'>
                                 <NavLink to={'/'} className="back-button">
@@ -106,27 +110,27 @@ export default function Detail() {
                                 </NavLink>
                                 <div className='details-content'>
                                     <div>
-                                        <img src={`${country.flags.png}`} alt={`${country.name.common} flag`} />
+                                        <img src={`${country?.flags.png}`} alt={`${country?.name.common} flag`} />
                                     </div>
                                     <div className="detail-area">
-                                        <h2 className="country-name">{`${country.name.common}`}</h2>
+                                        <h2 className="country-name">{`${country?.name.common}`}</h2>
                                         <div className="details-mid">
                                             <div>
                                                 <p className="details-item">
                                                     Native Name:<span>{` ${firstNativeEntry?.common || 'N/A'}`}</span>
                                                 </p>
                                                 <p className="details-item">Population:
-                                                    <span>{` ${country.population.toLocaleString() || 'N/A'}`}</span></p>
+                                                    <span>{` ${country?.population.toLocaleString() || 'N/A'}`}</span></p>
                                                 <p className="details-item">Region:
-                                                    <span>{` ${country.region || 'N/A'}`}</span></p>
+                                                    <span>{` ${country?.region || 'N/A'}`}</span></p>
                                                 <p className="details-item">Sub Region:
-                                                    <span>{` ${country.subregion || 'N/A'}`}</span></p>
+                                                    <span>{` ${country?.subregion || 'N/A'}`}</span></p>
                                                 <p className="details-item">Capital:
-                                                    <span>{` ${country.capital || 'N/A'}`}</span></p>
+                                                    <span>{` ${country?.capital || 'N/A'}`}</span></p>
                                             </div>
                                             <div className="">
                                                 <p className="details-item">Top Level Domain:
-                                                    <span>{` ${country.topLevelDomain}`}</span></p>
+                                                    <span>{` ${country?.topLevelDomain}`}</span></p>
                                                 <p className="details-item">Currencies:
                                                     <span>{` ${currencyEntries || 'N/A'}`}</span></p>
                                                 <p className="details-item">Languages:
