@@ -145,11 +145,14 @@ h1 {
 #search {
   border: 0;
   font-size: 0.75rem;
+  padding-block: 0.75rem;
+  width: 100%;
   background-color: var(--secondary-background);
   color: var(--primary-text);
 }
 ::placeholder {
   color: var(--placeholder-text);
+  padding-inline: 0.5rem;
 }
 
 input[type="search"]::-webkit-search-decoration,
@@ -237,6 +240,7 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 .shadow {
+  height: 100dvh;
   border: 1px solid var(--secondary-background);
   box-shadow: 0 0 5px 2px var(--secondary-background);
 }
@@ -259,6 +263,17 @@ input[type="search"]::-webkit-search-results-decoration {
 
 .details-content img {
   max-width: 100%;
+}
+
+.details-loading {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: center; */
+  height: 50%;
+  padding-left: 1rem;
+  /* display: block; */
+  /* margin: 0 auto; */
 }
 
 .back-button {
@@ -323,10 +338,9 @@ a:-webkit-any-link {
 }
 
 .loading {
-  gap: 3rem;
-  margin: 0 auto;
   text-align: center;
   width: 16.5rem;
+  margin: 0 auto;
   background-color: var(--secondary-background);
   border-radius: 1rem;
 }
@@ -397,6 +411,11 @@ a:-webkit-any-link {
     padding-inline: 5rem;
     gap: 3.5rem;
   }
+
+  .search-area {
+    padding-left: 1.75rem;
+    width: 30rem;
+  }
 }
 
 @media (width >= 62rem) {
@@ -441,5 +460,10 @@ a:-webkit-any-link {
 
   .card-home {
     padding-inline: 3rem;
+  }
+
+  .search-area {
+    padding-left: 1.75rem;
+    width: 30rem;
   }
 }
