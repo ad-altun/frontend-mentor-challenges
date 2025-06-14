@@ -15,8 +15,6 @@ export default function Filter({ onSelect }: FilterProps) {
         setSelected((prev) => {
             return !prev
         })
-        // const selectedRegion = homePage.filter((country) => country.region === region)
-        // return selectedRegion
     }
 
     let content = "Filter by Region"
@@ -36,11 +34,6 @@ export default function Filter({ onSelect }: FilterProps) {
                     <option value="Asia">Asia</option>
                     <option value="Europe">Europe</option>
                     <option value="Oceania">Oceania</option>
-                    {/* {regions.map((region: string, i) => {
-                        return (
-                            <option key={i} value={`${region}`}>{region}</option>
-                        )
-                    })} */}
                 </select>
             </div>
         </main>
