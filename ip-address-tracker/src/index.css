@@ -1,0 +1,68 @@
+:root {
+  /* --header-text: #111517; */
+}
+
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  /* margin: 0;
+  padding: 0; */
+}
+
+.app-main {
+  /* margin: 0;
+  padding: 0; */
+}
+
+.header-main {
+  /* display: flex;
+  flex-direction: column;
+  align-items: center; */
+  text-align: center;
+  background-image: url("/images/pattern-bg-mobile.png");
+  width: 23.4375rem;
+  height: 18.75rem;
+  padding-top: 1.625rem;
+}
+
+.header > h1 {
+  color: white;
+  margin-bottom: 1.5rem;
+  /* display: flex;
+  justify-content: center; */
+}
+
+.form {
+  display: flex;
+  /* justify-content: center; */
+  /* min-width: 20.4375rem; */
+  height: 3.625rem;
+  margin-inline: 1.5rem;
+  /* border: 3px solid red; */
+  border-radius: 2rem;
+}
+
+.header-form {
+  display: flex;
+}
+
+.header-input {
+  min-width: calc(20.4375rem - 3.625rem);
+  border: 0;
+  padding-left: 1rem;
+}
+
+.header-button {
+  width: 3.625rem;
+  /* height: 3.625rem; */
+  border: 0;
+  background-color: black;
+}
+
+/* continue with giving border-radius for the input area!! */
