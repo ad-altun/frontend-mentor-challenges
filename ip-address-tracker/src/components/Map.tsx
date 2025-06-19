@@ -1,6 +1,8 @@
 function Map() {
     return (
-        <div>Map</div>
+        <div className="map" id="map">
+
+        </div>
     )
 }
 
