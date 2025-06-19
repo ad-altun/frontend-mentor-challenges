@@ -1,5 +1,6 @@
 :root {
-  /* --header-text: #111517; */
+  --primary-text: #2b2b2b;
+  --secondary-text: #969696;
 }
 
 *,
@@ -10,14 +11,33 @@
   padding: 0;
 }
 
+.rubik-400 {
+  font-family: "Rubik", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+.rubik-500 {
+  font-family: "Rubik", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+.rubik-700 {
+  font-family: "Rubik", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
+
 body {
-  /* margin: 0;
-  padding: 0; */
+  font-size: 1.125rem;
 }
 
 .app-main {
-  /* margin: 0;
-  padding: 0; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .header-main {
@@ -44,8 +64,6 @@ body {
   /* min-width: 20.4375rem; */
   height: 3.625rem;
   margin-inline: 1.5rem;
-  /* border: 3px solid red; */
-  border-radius: 2rem;
 }
 
 .header-form {
@@ -56,13 +74,21 @@ body {
   min-width: calc(20.4375rem - 3.625rem);
   border: 0;
   padding-left: 1rem;
+  border-top-left-radius: 0.75rem;
+  border-bottom-left-radius: 0.75rem;
 }
 
 .header-button {
+  position: relative;
   width: 3.625rem;
-  /* height: 3.625rem; */
   border: 0;
   background-color: black;
+  border-top-right-radius: 0.75rem;
+  border-bottom-right-radius: 0.75rem;
 }
 
-/* continue with giving border-radius for the input area!! */
+.header-icon {
+  position: absolute;
+  top: 1.4375rem;
+  left: 1.625rem;
+}

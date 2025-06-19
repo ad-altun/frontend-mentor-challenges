@@ -8,7 +8,11 @@ function SearchBar() {
                         className="header-form">
                         <input id="inputt" className="header-input" type="text"
                             placeholder="Search for any IP address or domain" />
-                        <button className="header-button" type="submit"></button>
+                        <button className="header-button" type="submit">
+                            <img className="header-icon"
+                                src="../../images/icon-arrow.svg"
+                                alt="forward arrow icon" />
+                        </button>
                     </form>
                 </div>
             </div>
