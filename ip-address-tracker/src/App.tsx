@@ -5,8 +5,12 @@ import ShowIpBar from "./components/ShowIpBar"
 function App() {
   return (
     <div className="app-main">
-      <SearchBar />
-      <ShowIpBar />
+      <div className="test">
+        <SearchBar />
+        <div className="deneme">
+          <ShowIpBar />
+        </div>
+      </div>
       <Map />
     </div>
   )
